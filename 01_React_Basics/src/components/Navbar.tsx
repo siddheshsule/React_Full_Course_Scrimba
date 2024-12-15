@@ -1,13 +1,19 @@
 
+
 const Navbar = () => {
   return (
-    <nav>
-        <ul className="nav-items">
-            <li>Pricing</li>
-            <li>About</li>
-            <li>Contact</li>
-        </ul>
-    </nav>
+    <header>
+      <nav>
+        <img
+          className="logo"
+          id="react-bg-logo"
+          src="/react-logo-lg.png"
+          alt="React Logo"
+          width={40}
+        />
+        <span>ReactFacts</span>
+      </nav>
+    </header>
 )
 }
 
