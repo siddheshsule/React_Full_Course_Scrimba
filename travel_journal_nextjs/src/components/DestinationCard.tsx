@@ -40,6 +40,7 @@ const DestinationCard = ( {img,
             <Link
               href={googleMapsLink}
               className="ml-2 underline text-gray-400"
+              target="_blank"
             >
               View on Google Maps
             </Link>
