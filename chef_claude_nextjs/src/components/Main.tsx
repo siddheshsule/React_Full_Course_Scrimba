@@ -8,9 +8,7 @@ const Main = () => {
 
   const[ingredients, setIngredients] = useState<string[]>([]);
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const formData = new FormData(event.currentTarget as HTMLFormElement);
+  const addIngredient = (formData: FormData) => {
     const newIngredient = formData.get("ingredient") as string;
     if(newIngredient === "") {
       alert("Please enter an ingredient.");
@@ -18,6 +16,7 @@ const Main = () => {
     }
     if(!ingredients.includes(newIngredient)) {
       setIngredients([...ingredients, newIngredient]);
+      formData.delete("ingredient");     
 
     } else {
       alert("This ingredient is already on the list.");
@@ -27,13 +26,12 @@ const Main = () => {
   }
 
   const handleReset = () => {
-    setIngredients([]); 
-
+     setIngredients([]);
   }
   return (
     <div className="mt-16 flex flex-col items-center align-center p-5">
       <div className="flex flex-col">
-        <form className="flex flex-row gap-3" onSubmit={handleSubmit}>
+        <form className="flex flex-row gap-3" action={addIngredient}>
           <input
             type="text"
             placeholder="e.g. oregano"
@@ -52,7 +50,7 @@ const Main = () => {
           <h2 className="text-3xl font-semibold mt-5">Ingredients on hand:</h2>
           <ul className="space-y-3 text-lg ml-5 mt-5">
             {ingredients.map((item, index) => (
-              <li key={index} className="my-2 list-disc">
+              <li key={index} className="my-2 list-disc text-gray-500" >
                 {item}
               </li>
             ))}
