@@ -1,6 +1,6 @@
 import React from "react";
 
-const CallToAction = () => {
+const CallToAction = ({handleAction}: {handleAction: ()=>void} ) => {
   return (
     <div className="flex flex-row items-center justify-center mx-8  bg-gray-200 p-5 rounded-lg space-x-10">
       <div className="flex flex-col space-y-4">
@@ -8,7 +8,7 @@ const CallToAction = () => {
         <p className="text-gray-400">Generate a receipe from your list of ingredients.</p>
       </div>
       <div>
-        <button className="bg-amber-600 hover:bg-amber-500 text-blue-50 py-2 px-8 rounded-lg">
+        <button onClick={handleAction} className="bg-amber-600 hover:bg-amber-500 text-blue-50 py-2 px-8 rounded-lg">
           Get a receipe
         </button>
       </div>
