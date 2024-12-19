@@ -31,6 +31,8 @@ const Main = () => {
 
   const handleReset = () => {
     setIngredients([]);
+    setReceipeShown(false);
+    
   };
 
   return (

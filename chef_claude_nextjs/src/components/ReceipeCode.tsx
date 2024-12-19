@@ -3,16 +3,16 @@ import React from "react";
 const ReceipeCode = () => {
   return (
     <section>
-      <h2>Chef Claude Recommends:</h2>
-      <article className="suggested-recipe-container" aria-live="polite">
-        <p>
+      <h2 className="text-2xl font-semibold mb-5">Chef Claude Recommends:</h2>
+      <article className="text-[#475467] text-lg" aria-live="polite">
+        <p className="mb-8">
           Based on the ingredients you have available, I would recommend making
           a simple a delicious <strong>Beef Bolognese Pasta</strong>. Here is
           the recipe:
         </p>
-        <h3>Beef Bolognese Pasta</h3>
+        <h3 className="text-xl font-bold mb-5">Beef Bolognese Pasta</h3>
         <strong>Ingredients:</strong>
-        <ul>
+        <ul className="mb-8 list-disc ml-10">
           <li>1 lb. ground beef</li>
           <li>1 onion, diced</li>
           <li>3 cloves garlic, minced</li>
@@ -27,7 +27,7 @@ const ReceipeCode = () => {
           </li>
         </ul>
         <strong>Instructions:</strong>
-        <ol>
+        <ol className="mb-8 list-decimal ml-10">
           <li>Bring a large pot of salted water to a boil for the pasta.</li>
           <li>
             In a large skillet or Dutch oven, cook the ground beef over
