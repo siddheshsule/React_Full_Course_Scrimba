@@ -1,67 +1,17 @@
 import React from "react";
+import Markdown from "react-markdown";
 
-const ReceipeCode = () => {
+const RecipeCode = (props: { recipe: string}) => {
+    // const markdownExample = "# Parsley Butter Baked Fish ## Ingredients: - 4 fillets of fish (such as cod, tilapia, or salmon) - 1/2 cup unsalted butter, softened - 2 tablespoons fresh parsley, finely chopped - 1/2 teaspoon salt - 1/4 teaspoon black pepper ## Instructions: 1. Preheat your oven to 400°F (200°C). 2. In a small bowl, combine the softened butter, chopped parsley, salt, and black pepper. Mix well until fully incorporated. 3. Place the fish fillets in a baking dish. Spread the parsley butter evenly over the top of the fish. 4. Bake the fish for 15-20 minutes, or until it flakes easily with a fork and is cooked through. 5. Serve the parsley butter baked fish immediately, garnished with additional fresh parsley if desired. Enjoy with a side of your choice, such as steamed vegetables or a salad. This recipe utilizes the milk, butter, and parsley you have available, and pairs them with a simple yet flavorful baked fish dish. The parsley butter adds a lovely bright and savory element to the fish, making for a delicious and easy-to-prepare meal."
   return (
     <section>
       <h2 className="text-2xl font-semibold mb-5">Chef Claude Recommends:</h2>
       <article className="text-[#475467] text-lg" aria-live="polite">
-        <p className="mb-8">
-          Based on the ingredients you have available, I would recommend making
-          a simple a delicious <strong>Beef Bolognese Pasta</strong>. Here is
-          the recipe:
-        </p>
-        <h3 className="text-xl font-bold mb-5">Beef Bolognese Pasta</h3>
-        <strong>Ingredients:</strong>
-        <ul className="mb-8 list-disc ml-10">
-          <li>1 lb. ground beef</li>
-          <li>1 onion, diced</li>
-          <li>3 cloves garlic, minced</li>
-          <li>2 tablespoons tomato paste</li>
-          <li>1 (28 oz) can crushed tomatoes</li>
-          <li>1 cup beef broth</li>
-          <li>1 teaspoon dried oregano</li>
-          <li>1 teaspoon dried basil</li>
-          <li>Salt and pepper to taste</li>
-          <li>
-            8 oz pasta of your choice (e.g., spaghetti, penne, or linguine)
-          </li>
-        </ul>
-        <strong>Instructions:</strong>
-        <ol className="mb-8 list-decimal ml-10">
-          <li>Bring a large pot of salted water to a boil for the pasta.</li>
-          <li>
-            In a large skillet or Dutch oven, cook the ground beef over
-            medium-high heat, breaking it up with a wooden spoon, until browned
-            and cooked through, about 5-7 minutes.
-          </li>
-          <li>
-            Add the diced onion and minced garlic to the skillet and cook for
-            2-3 minutes, until the onion is translucent.
-          </li>
-          <li>Stir in the tomato paste and cook for 1 minute.</li>
-          <li>
-            Add the crushed tomatoes, beef broth, oregano, and basil. Season
-            with salt and pepper to taste.
-          </li>
-          <li>
-            Reduce the heat to low and let the sauce simmer for 15-20 minutes,
-            stirring occasionally, to allow the flavors to meld.
-          </li>
-          <li>
-            While the sauce is simmering, cook the pasta according to the
-            package instructions. Drain the pasta and return it to the pot.
-          </li>
-          <li>
-            Add the Bolognese sauce to the cooked pasta and toss to combine.
-          </li>
-          <li>
-            Serve hot, garnished with additional fresh basil or grated Parmesan
-            cheese if desired.
-          </li>
-        </ol>
+        {/* {props.recipe} */}
+        <Markdown>{props.recipe}</Markdown>
       </article>
     </section>
   );
 };
 
-export default ReceipeCode;
+export default RecipeCode;

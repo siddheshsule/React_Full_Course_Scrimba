@@ -1,5 +1,3 @@
-import React from "react";
-
 const CallToAction = ({handleAction}: {handleAction: ()=>void} ) => {
   return (
     <div className="flex flex-row items-center justify-center mx-8  bg-gray-200 p-5 rounded-lg space-x-10">
