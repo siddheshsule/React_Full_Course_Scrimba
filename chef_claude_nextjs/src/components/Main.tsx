@@ -4,7 +4,7 @@ import { FormEvent } from "react";
 import { useState } from "react";
 import CallToAction from "./CallToAction";
 import { getRecipeFromChefClaude, getRecipeFromMistral } from "@/lib/ai";
-import ReceipeCode from "./ReceipeCode";
+import Receipe from "./Receipe";
 
 const Main = () => {
   const [ingredients, setIngredients] = useState<string[]>([]);
@@ -87,7 +87,7 @@ const Main = () => {
 
         {recipe && (
           <div className="mt-12">
-            <ReceipeCode recipe={recipe} />
+            <Receipe recipe={recipe} />
           </div>
         )}
       </div>
