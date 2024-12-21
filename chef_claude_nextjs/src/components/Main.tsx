@@ -1,6 +1,6 @@
 "use client";
 
-import { FormEvent } from "react";
+import { FormEvent, useEffect, useRef } from "react";
 import { useState } from "react";
 import CallToAction from "./CallToAction";
 import { getRecipeFromChefClaude, getRecipeFromMistral } from "@/lib/ai";
@@ -9,6 +9,7 @@ import Receipe from "./Receipe";
 const Main = () => {
   const [ingredients, setIngredients] = useState<string[]>([]);
   const [recipe, setRecipe] = useState<string>("")
+  const recipeSection = useRef<HTMLDivElement>(null);
 
   const addIngredient = (formData: FormData) => {
     const newIngredient = formData.get("ingredient") as string;
@@ -33,6 +34,12 @@ const Main = () => {
     setIngredients([]);
     setRecipe("");
   };
+
+  useEffect(() => {
+    if (recipe !== "" && recipeSection.current !== null) {
+      recipeSection.current?.scrollIntoView({ behavior: "smooth" });
+    }
+  }, [recipe]);
 
   return (
     <div className="mt-16 flex flex-col items-center align-center p-5">
@@ -79,7 +86,7 @@ const Main = () => {
             </ul>
             {ingredients.length > 3 && (
               <div className="mt-12">
-                <CallToAction handleAction={handleRecipe} />
+                <CallToAction ref={recipeSection} handleAction={handleRecipe} />
               </div>
             )}
           </section>
