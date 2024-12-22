@@ -1,22 +1,38 @@
 "use client";
 
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Dice from "./Dice";
+import { nanoid } from "nanoid";
 
 const Main = () => {
-  const [dice, setDice] = React.useState([]);
+  const [dice, setDice] = useState([]);
+  const [isHeld, setIsHeld] = useState(false);
 
   const generateAllNewDice = () => {
-    return new Array(10).fill(0).map(() => Math.ceil(Math.random() * 6));
+    return new Array(10).fill(0).map(() => ({
+      value: Math.ceil(Math.random() * 6),
+      isHeld: false,
+      id: nanoid(),
+    }));
   };
 
   useEffect(() => {
     setDice(generateAllNewDice());
   }, []);
 
-  const diceElements = dice.map((value, index) => {
-    return <Dice key={index} value={value} />;
+  const diceElements = dice.map(dieObj => {
+    return (
+      <Dice key={dieObj.id} value={dieObj.value} isHeld={dieObj.isHeld} hold={() => hold(dieObj.id)} />
+    );
   });
+
+  const hold = (id) => {
+    setDice(oldDice => {
+      return oldDice.map(die => {
+        return die.id === id ? { ...die, isHeld: !die.isHeld } : die;
+      });
+    });
+  };
 
   return (
     <div className="flex justify-center items-center h-screen">
