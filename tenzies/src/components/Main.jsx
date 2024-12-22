@@ -1,20 +1,22 @@
-'use client'
+"use client";
 
-import React from "react";
+import React, { useEffect } from "react";
 import Dice from "./Dice";
 
 const Main = () => {
+  const [dice, setDice] = React.useState([]);
 
-    const [diceValue, setDiceValue] = React.useState(1)
-    const [isFrozen, setIsFrozen] = React.useState(false)
-    const handleClick = () => {
-        if (isFrozen) return
-        setDiceValue(Math.floor(Math.random() * 6) + 1)
-    }
-    const handleDiceRoll = () => {
-        setDiceValue(Math.floor(Math.random() * 6) + 1)
-    }
+  const generateAllNewDice = () => {
+    return new Array(10).fill(0).map(() => Math.ceil(Math.random() * 6));
+  };
 
+  useEffect(() => {
+    setDice(generateAllNewDice());
+  }, []);
+
+  const diceElements = dice.map((value, index) => {
+    return <Dice key={index} value={value} />;
+  });
 
   return (
     <div className="flex justify-center items-center h-screen">
@@ -27,13 +29,12 @@ const Main = () => {
               its current value between rolls.
             </p>
           </div>
-          <div className="grid grid-cols-5 gap-4 my-auto">
-            {[...Array(10)].map((_, i) => (
-              <Dice key={i} value={diceValue} />
-            ))}
-          </div>
+          <div className="grid grid-cols-5 gap-4 my-auto">{diceElements}</div>
           <div className="mb-6">
-            <button onClick={handleDiceRoll} className="flex text-center bottom-0 hover:bg-[#5e46fa] text-white px-8 py-1 rounded-md bg-[#5035FF]">
+            <button
+              onClick={() => setDice(generateAllNewDice())}
+              className="flex text-center bottom-0 hover:bg-[#5e46fa] text-white px-8 py-1 rounded-md bg-[#5035FF]"
+            >
               Roll
             </button>
           </div>
