@@ -3,10 +3,16 @@
 import React, { useEffect, useState } from "react";
 import Dice from "./Dice";
 import { nanoid } from "nanoid";
+import Confetti from "./Confetti";
 
 const Main = () => {
   const [dice, setDice] = useState([]);
-  const [isHeld, setIsHeld] = useState(false);
+
+  let gameWon = dice.every((die) => die.value === dice[0].value);
+
+  useEffect(() => {
+    setDice(generateAllNewDice());
+  }, []);
 
   const generateAllNewDice = () => {
     return new Array(10).fill(0).map(() => ({
@@ -16,22 +22,35 @@ const Main = () => {
     }));
   };
 
-  useEffect(() => {
-    setDice(generateAllNewDice());
-  }, []);
+  const rollDice = () => {
+    if (gameWon) {
+      setDice(generateAllNewDice());
+      return;
+    }
+    setDice((oldDice) =>
+      oldDice.map((die) =>
+        die.isHeld ? die : { ...die, value: Math.ceil(Math.random() * 6) }
+      )
+    );
+  };
 
-  const diceElements = dice.map(dieObj => {
+  const diceElements = dice.map((dieObj) => {
     return (
-      <Dice key={dieObj.id} value={dieObj.value} isHeld={dieObj.isHeld} hold={() => hold(dieObj.id)} />
+      <Dice
+        key={dieObj.id}
+        value={dieObj.value}
+        isHeld={dieObj.isHeld}
+        hold={() => hold(dieObj.id)}
+      />
     );
   });
 
   const hold = (id) => {
-    setDice(oldDice => {
-      return oldDice.map(die => {
-        return die.id === id ? { ...die, isHeld: !die.isHeld } : die;
-      });
-    });
+    setDice((oldDice) =>
+      oldDice.map((die) =>
+        die.id === id ? { ...die, isHeld: !die.isHeld } : die
+      )
+    );
   };
 
   return (
@@ -45,13 +64,21 @@ const Main = () => {
               its current value between rolls.
             </p>
           </div>
+          {
+            gameWon &&
+            <><Confetti /><div className="flex text-center text-[#4A4E74] mt-4">
+              <h1 className="font-bold text-2xl">You Win!</h1>
+            </div></>
+
+
+          }
           <div className="grid grid-cols-5 gap-4 my-auto">{diceElements}</div>
           <div className="mb-6">
             <button
-              onClick={() => setDice(generateAllNewDice())}
+              onClick={rollDice}
               className="flex text-center bottom-0 hover:bg-[#5e46fa] text-white px-8 py-1 rounded-md bg-[#5035FF]"
             >
-              Roll
+              {gameWon ? "Play Again" : "Roll"}
             </button>
           </div>
         </div>
